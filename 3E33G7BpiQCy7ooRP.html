@@ -1,0 +1,622 @@
+<html><head><base href="/">
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap');
+
+:root {
+  --neon-green: #00ff41;
+  --neon-pink: #ff00ff; 
+  --neon-blue: #00ffff;
+  --neon-yellow: #ffff00;
+  --bg-dark: #0a0a0a;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: 'Press Start 2P', cursive;
+}
+
+body {
+  background: var(--bg-dark);
+  color: var(--neon-green);
+  min-height: 100vh;
+  overflow-x: hidden;
+}
+
+.digital-rain {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  z-index: 0;
+}
+
+.container {
+  position: relative;
+  z-index: 1;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 2rem;
+}
+
+.logo {
+  font-size: 2.5rem;
+  text-align: center;
+  margin: 2rem 0;
+  animation: neonPulse 1.5s infinite alternate;
+  text-shadow: 0 0 5px var(--neon-green),
+               0 0 10px var(--neon-green),
+               0 0 20px var(--neon-green),
+               0 0 40px var(--neon-green);
+  position: relative;
+  letter-spacing: 2px;
+}
+
+.logo::before,
+.logo::after {
+  content: 'MASHPROTOCOL';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  opacity: 0.8;
+}
+
+.logo::before {
+  color: var(--neon-pink);
+  animation: glitchTop 2s infinite linear alternate-reverse;
+}
+
+.logo::after {
+  color: var(--neon-blue);
+  animation: glitchBtm 3s infinite linear alternate-reverse;
+}
+
+@keyframes neonPulse {
+  0% {
+    text-shadow: 0 0 5px var(--neon-green),
+                 0 0 10px var(--neon-green),
+                 0 0 20px var(--neon-green);
+  }
+  100% {
+    text-shadow: 0 0 5px var(--neon-green),
+                 0 0 10px var(--neon-green),
+                 0 0 20px var(--neon-green),
+                 0 0 40px var(--neon-green),
+                 0 0 80px var(--neon-green);
+  }
+}
+
+@keyframes glitchTop {
+  0% {
+    transform: translate(-2px, -2px);
+  }
+  20% {
+    transform: translate(2px, 2px);
+  }
+  40% {
+    transform: translate(-2px, 2px);
+  }
+  60% {
+    transform: translate(2px, -2px);
+  }
+  80% {
+    transform: translate(-2px, 2px);
+  }
+  100% {
+    transform: translate(2px, -2px);
+  }
+}
+
+@keyframes glitchBtm {
+  0% {
+    transform: translate(2px, 2px);
+  }
+  20% {
+    transform: translate(-2px, -2px);
+  }
+  40% {
+    transform: translate(2px, -2px);
+  }
+  60% {
+    transform: translate(-2px, 2px);
+  }
+  80% {
+    transform: translate(2px, -2px);
+  }
+  100% {
+    transform: translate(-2px, 2px);
+  }
+}
+
+.nav {
+  display: flex;
+  justify-content: center;
+  gap: 2rem;
+  margin-bottom: 3rem;
+  position: relative;
+  padding: 1rem;
+  border: 2px solid transparent;
+  border-image: linear-gradient(45deg, var(--neon-blue), var(--neon-pink), var(--neon-yellow), var(--neon-green)) 1;
+  backdrop-filter: blur(5px);
+  box-shadow: 0 0 20px rgba(0, 255, 255, 0.2);
+}
+
+.nav::before {
+  content: '';
+  position: absolute;
+  top: -2px;
+  left: -2px;
+  right: -2px;
+  bottom: -2px;
+  background: linear-gradient(45deg, var(--neon-blue), var(--neon-pink), var(--neon-yellow), var(--neon-green));
+  z-index: -1;
+  opacity: 0.2;
+  animation: borderGlow 3s infinite linear;
+}
+
+@keyframes borderGlow {
+  0% { opacity: 0.1; }
+  50% { opacity: 0.3; }
+  100% { opacity: 0.1; }
+}
+
+.nav-link {
+  color: var(--neon-blue);
+  text-decoration: none;
+  padding: 0.5rem 1rem;
+  border: 2px solid var(--neon-blue);
+  transition: all 0.3s;
+  position: relative;
+  overflow: hidden;
+}
+
+.nav-link::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    rgba(0, 255, 255, 0.2),
+    transparent
+  );
+  transition: 0.5s;
+}
+
+.nav-link:hover::before {
+  left: 100%;
+}
+
+.nav-link:hover {
+  background: var(--neon-blue);
+  color: var(--bg-dark);
+  text-shadow: 0 0 5px rgba(0, 255, 255, 0.5);
+  box-shadow: 0 0 15px var(--neon-blue);
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 3rem;
+  margin-top: 4rem;
+  animation: fadeIn 1s ease-out;
+  perspective: 1000px;
+  border: 2px solid transparent;
+  border-image: linear-gradient(45deg, rgba(255,0,255,0.5), rgba(0,255,255,0.5), rgba(255,255,0,0.5), rgba(255,0,255,0.5)) 1;
+  backdrop-filter: blur(5px);
+  padding: 2rem;
+  box-shadow: 0 0 30px rgba(255,255,255,0.1);
+  position: relative;
+}
+
+.card {
+  background: rgba(255,255,255,0.05);
+  border: 2px solid var(--neon-pink);
+  padding: 1.5rem;
+  border-radius: 4px;
+  transition: transform 0.3s, box-shadow 0.3s;
+  transform-style: preserve-3d;
+  position: relative;
+  overflow: hidden;
+}
+
+.card::before {
+  content: '';
+  position: absolute;
+  top: -50%;
+  left: -50%;
+  width: 200%;
+  height: 200%;
+  background: linear-gradient(
+    45deg,
+    transparent,
+    rgba(255, 0, 255, 0.1),
+    transparent
+  );
+  transform: rotate(45deg);
+  animation: shine 3s infinite;
+}
+
+@keyframes shine {
+  0% {
+    left: -50%;
+  }
+  100% {
+    left: 100%;
+  }
+}
+
+.card:hover {
+  transform: translateZ(20px) rotateX(5deg);
+  box-shadow: 0 0 20px var(--neon-pink);
+}
+
+.card h2 {
+  color: var(--neon-pink);
+  margin-bottom: 1rem;
+  font-size: 1rem;
+  position: relative;
+}
+
+.card p {
+  line-height: 1.6;
+  margin-bottom: 1.5rem;
+  color: rgba(255, 255, 255, 0.8);
+}
+
+.button {
+  background: transparent;
+  border: 2px solid var(--neon-yellow);
+  color: var(--neon-yellow);
+  padding: 0.5rem 1rem;
+  cursor: pointer;
+  transition: all 0.3s;
+  font-size: 0.8rem;
+  margin-top: 1rem;
+  position: relative;
+  overflow: hidden;
+}
+
+.button::after {
+  content: '';
+  position: absolute;
+  top: -50%;
+  left: -50%;
+  width: 200%;
+  height: 200%;
+  background: linear-gradient(
+    45deg,
+    transparent,
+    rgba(255, 255, 0, 0.2),
+    transparent
+  );
+  transform: rotate(45deg);
+  transition: 0.5s;
+  opacity: 0;
+}
+
+.button:hover {
+  background: var(--neon-yellow);
+  color: var(--bg-dark);
+}
+
+.button:hover::after {
+  opacity: 1;
+}
+
+.footer {
+  position: relative;
+  z-index: 1;
+  margin-top: 4rem;
+  padding: 2rem;
+  border-top: 2px solid transparent;
+  border-image: linear-gradient(45deg, var(--neon-blue), var(--neon-pink)) 1;
+}
+
+.social-links {
+  display: flex;
+  justify-content: center;
+  gap: 2rem;
+  margin: 2rem 0;
+}
+
+.social-link {
+  color: var(--neon-blue);
+  text-decoration: none;
+  font-size: 0.8rem;
+  padding: 0.5rem 1rem;
+  border: 1px solid var(--neon-blue);
+  transition: all 0.3s;
+}
+
+.social-link:hover {
+  background: var(--neon-blue);
+  color: var(--bg-dark);
+  box-shadow: 0 0 15px var(--neon-blue);
+}
+
+.help-text {
+  text-align: center;
+  font-size: 0.7rem;
+  color: var(--neon-green);
+  margin-top: 1rem;
+}
+
+.wallet-status {
+  position: fixed;
+  top: 1rem;
+  right: 1rem;
+  padding: 0.5rem 1rem;
+  border: 2px solid var(--neon-blue);
+  font-size: 0.7rem;
+  cursor: pointer;
+  transition: all 0.3s;
+  background: rgba(0, 0, 0, 0.6);
+  backdrop-filter: blur(5px);
+  border-radius: 4px;
+  z-index: 100;
+  text-align: center;
+  box-shadow: 0 0 10px rgba(0, 255, 255, 0.2);
+}
+
+.wallet-status:hover {
+  background: var(--neon-blue);
+  color: var(--bg-dark);
+  box-shadow: 0 0 20px var(--neon-blue);
+}
+
+.wallet-status.connected {
+  border-color: var(--neon-green);
+  color: var(--neon-green);
+}
+
+.wallet-status.connected:hover {
+  background: var(--neon-green);
+  color: var(--bg-dark);
+  box-shadow: 0 0 20px var(--neon-green);
+}
+
+@media screen and (max-width: 768px) {
+  .container {
+    padding: 1rem;
+  }
+
+  .logo {
+    font-size: 1.5rem;
+    margin: 1rem 0;
+  }
+
+  .nav {
+    flex-direction: column;
+    gap: 1rem;
+    padding: 1rem 0.5rem;
+  }
+
+  .nav-link {
+    width: 100%;
+    text-align: center;
+  }
+
+  .grid {
+    grid-template-columns: 1fr;
+    gap: 1.5rem;
+    margin-top: 2rem;
+    padding: 1rem;
+  }
+
+  .card {
+    padding: 1rem;
+  }
+
+  .card h2 {
+    font-size: 0.8rem;
+  }
+
+  .card p {
+    font-size: 0.7rem;
+  }
+
+  .button {
+    width: 100%;
+    font-size: 0.7rem;
+  }
+
+  .wallet-status {
+    position: fixed;
+    top: auto;
+    bottom: 1rem;
+    right: 50%;
+    transform: translateX(50%);
+    width: calc(100% - 2rem);
+    max-width: 300px;
+    padding: 0.8rem 1rem;
+    font-size: 0.8rem;
+    z-index: 1000;
+  }
+
+  .footer {
+    margin-top: 2rem;
+    padding: 1rem;
+  }
+
+  .social-links {
+    flex-wrap: wrap;
+    gap: 1rem;
+  }
+
+  .social-link {
+    font-size: 0.7rem;
+    padding: 0.3rem 0.7rem;
+  }
+
+  .help-text {
+    font-size: 0.6rem;
+  }
+}
+</style>
+</head>
+<body>
+
+<canvas class="digital-rain"></canvas>
+
+<div class="container">
+  <h1 class="logo">MASHPROTOCOL</h1>
+  
+  <nav class="nav">
+    <a href="https://example.com/marketplace" class="nav-link">MARKETPLACE</a>
+    <a href="https://example.com/mint" class="nav-link">MINT RWA</a>
+    <a href="https://example.com/portfolio" class="nav-link">PORTFOLIO</a>
+    <a href="https://example.com/profile" class="nav-link">PROFILE</a>
+  </nav>
+
+  <div class="wallet-status">
+    NOT CONNECTED
+  </div>
+
+  <div class="grid">
+    <div class="card">
+      <h2>TOKENIZE ASSETS</h2>
+      <p>Convert your real-world assets into blockchain tokens with our secure minting process.</p>
+      <button class="button">START MINTING</button>
+    </div>
+
+    <div class="card">
+      <h2>EXPLORE RWAs</h2>
+      <p>Browse and invest in a diverse range of tokenized real-world assets.</p>
+      <button class="button">VIEW MARKETPLACE</button>
+    </div>
+
+    <div class="card">
+      <h2>PORTFOLIO TRACKING</h2>
+      <p>Monitor your asset performance with advanced analytics tools.</p>
+      <button class="button">CHECK PORTFOLIO</button>
+    </div>
+  </div>
+
+  <footer class="footer" style="background: rgba(255,255,255,0.05); backdrop-filter: blur(10px); border-radius: 10px; box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37); border: 1px solid rgba(255, 255, 255, 0.18);">
+    <div class="social-links">
+      <a href="https://discord.gg/mashprotocol" class="social-link">DISCORD</a>
+      <a href="https://t.me/mashprotocol" class="social-link">TELEGRAM</a>
+      <a href="https://twitter.com/mashprotocol" class="social-link">TWITTER</a>
+      <a href="https://docs.mashprotocol.com" class="social-link">DOCS</a>
+    </div>
+    <p class="help-text">NEED HELP? JOIN OUR COMMUNITY ON DISCORD OR TELEGRAM</p>
+    <p class="help-text"> 2024 MASHPROTOCOL | ALL RIGHTS RESERVED</p>
+</footer>
+</div>
+
+<script>
+// Digital Rain Effect
+const canvas = document.querySelector('.digital-rain');
+const ctx = canvas.getContext('2d');
+
+let width = canvas.width = window.innerWidth;
+let height = canvas.height = window.innerHeight;
+
+const chars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789$@#%&*';
+const drops = [];
+const fontSize = 16;
+const columns = width / fontSize;
+
+for(let i = 0; i < columns; i++) {
+  drops[i] = 1;
+}
+
+function draw() {
+  ctx.fillStyle = 'rgba(0, 0, 0, 0.05)';
+  ctx.fillRect(0, 0, width, height);
+  
+  ctx.fillStyle = '#0F0';
+  ctx.font = fontSize + 'px "Press Start 2P"';
+  
+  const skipFactor = width < 768 ? 2 : 1;
+  
+  for(let i = 0; i < drops.length; i += skipFactor) {
+    const text = chars[Math.floor(Math.random() * chars.length)];
+    ctx.fillText(text, i * fontSize, drops[i] * fontSize);
+    
+    if(drops[i] * fontSize > height && Math.random() > 0.975) {
+      drops[i] = 0;
+    }
+    drops[i]++;
+  }
+}
+
+window.addEventListener('resize', () => {
+  width = canvas.width = window.innerWidth; 
+  height = canvas.height = window.innerHeight;
+  
+  const columns = Math.ceil(width / fontSize);
+  while(drops.length > columns) {
+    drops.pop();
+  }
+  while(drops.length < columns) {
+    drops.push(1);
+  }
+});
+
+const frameRate = width < 768 ? 75 : 50;
+setInterval(draw, frameRate);
+
+// Handle Wallet Connection
+const walletStatus = document.querySelector('.wallet-status');
+let isConnected = false;
+
+const connectWallet = async () => {
+  if (typeof window.ethereum !== 'undefined') {
+    try {
+      const accounts = await window.ethereum.request({ method: 'eth_requestAccounts' });
+      isConnected = true;
+      walletStatus.textContent = `${accounts[0].slice(0,6)}...${accounts[0].slice(-4)}`;
+      walletStatus.classList.add('connected');
+      
+      // Listen for account changes
+      window.ethereum.on('accountsChanged', (newAccounts) => {
+        if (newAccounts.length === 0) {
+          // User disconnected
+          isConnected = false;
+          walletStatus.textContent = 'NOT CONNECTED';
+          walletStatus.classList.remove('connected');
+        } else {
+          // Account changed
+          walletStatus.textContent = `${newAccounts[0].slice(0,6)}...${newAccounts[0].slice(-4)}`;
+        }
+      });
+      
+      // Listen for chain changes
+      window.ethereum.on('chainChanged', () => {
+        // Reload the page
+        window.location.reload();
+      });
+      
+    } catch (error) {
+      console.error(error);
+      walletStatus.textContent = 'CONNECTION FAILED';
+      setTimeout(() => {
+        walletStatus.textContent = 'NOT CONNECTED';
+      }, 2000);
+    }
+  } else {
+    walletStatus.textContent = 'INSTALL METAMASK';
+    setTimeout(() => {
+      window.open('https://metamask.io', '_blank');
+      walletStatus.textContent = 'NOT CONNECTED';
+    }, 2000);
+  }
+};
+
+walletStatus.addEventListener('click', () => {
+  if (!isConnected) {
+    connectWallet();
+  }
+});
+</script>
+
+</body></html>
